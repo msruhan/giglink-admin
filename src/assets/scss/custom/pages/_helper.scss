@@ -1,0 +1,27 @@
+/*********************************/
+/*             Helper            */
+/*===============================*/
+
+/* Switcher */
+.label {
+    .ball {
+        transition: transform 0.2s linear;
+        @apply translate-x-0;
+    }
+}
+
+.checkbox:checked + .label .ball {
+	@apply translate-x-6;
+}
+
+/****************/
+/*  simplebar   */ 
+/****************/ 
+.simplebar-track {
+    &.simplebar-vertical {
+        @apply w-2 #{!important};
+        .simplebar-scrollbar {
+            @apply before:w-1 before:bg-slate-300 dark:before:bg-slate-700 #{!important};
+        }
+    }
+}
