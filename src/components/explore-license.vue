@@ -24,7 +24,7 @@
                     <div v-for="product in filteredData" :key="product.id" class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all  duration-500 hover:-mt-2 h-[420px] flex flex-col justify-between">
                         <div class="relative overflow-hidden">
                             <div class="relative overflow-hidden rounded-lg">
-                                <img :src="product.image_url" class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500" alt="">
+                                <img :src="product.image_url_1" class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500" alt="">
                             </div>
 
                             <div class="absolute -bottom-20 group-hover:bottom-1/2 group-hover:translate-y-1/2 start-0 end-0 mx-auto text-center transition-all duration-500">

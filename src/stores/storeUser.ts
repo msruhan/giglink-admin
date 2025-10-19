@@ -36,7 +36,14 @@ export const useUserStore = defineStore('storeUser', {
       this.error = null
       this.success = false
       try {
-        const response = await axios.get(`http://localhost:5050/api/users/${id}`)
+        const token = localStorage.getItem('jwt_token');
+        const response = await axios.get(`http://localhost:5050/api/users/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
         // response.data adalah detail pengguna
         return response.data
       } catch (err: any) {

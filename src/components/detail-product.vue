@@ -17,7 +17,7 @@
 
             <div class="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
                 <div class="lg:col-span-5">
-                    <img :src="productDetail.image_url"
+                    <img :src="productDetail.image_url_1"
                         class="rounded-md shadow dark:shadow-gray-700 w-full" alt="">
 
                     <div class="bg-white dark:bg-slate-900 rounded-md shadow dark:shadow-gray-800 mt-[30px] p-6">
@@ -71,7 +71,7 @@
                         <div class="md:w-1/2">
                             <div class="flex items-center">
                                 <div class="relative inline-block">
-                                    <img :src="productDetail.image_url" class="h-16 rounded-md" alt="">
+                                    <img :src="productDetail.image_url_1" class="h-16 rounded-md" alt="">
                                     <i
                                         class="mdi mdi-check-decagram text-emerald-600 text-lg absolute -top-2 -end-2"></i>
                                 </div>

@@ -5,13 +5,13 @@
                 <!-- Start Content -->
                 <div class="flex justify-between items-center">
                     <div>
-                        <h5 class="text-lg font-semibold">Explore Items</h5>
+                        <h5 class="text-lg font-semibold">Explore Products</h5>
 
                         <ul class="breadcrumb tracking-[0.5px] mb-0 inline-block mt-1">
                             <li class="inline breadcrumb-item text-[15px] font-semibold duration-500 text-slate-400 dark:text-white/60 hover:text-slate-900 dark:hover:text-white">
                                 <router-link to="/">Giglink</router-link>
                             </li>
-                            <li class="inline breadcrumb-item text-[15px] font-semibold duration-500 text-slate-900 dark:text-white" aria-current="page">Explore Items</li>
+                            <li class="inline breadcrumb-item text-[15px] font-semibold duration-500 text-slate-900 dark:text-white" aria-current="page">Explore Products</li>
                         </ul>
                     </div>
 
@@ -24,11 +24,14 @@
                     <div v-for="product in filteredData" :key="product.id" class="group relative overflow-hidden p-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 hover:shadow-md dark:shadow-md hover:dark:shadow-gray-700 transition-all  duration-500 hover:-mt-2 h-[420px] flex flex-col justify-between">
                         <div class="relative overflow-hidden">
                             <div class="relative overflow-hidden rounded-lg">
-                                <img :src="product.image_url" class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500" alt="">
+                                <img :src="product.image_url_1" class="rounded-lg shadow-md dark:shadow-gray-700 group-hover:scale-110 transition-all duration-500" alt="">
                             </div>
 
                             <div class="absolute -bottom-20 group-hover:bottom-1/2 group-hover:translate-y-1/2 start-0 end-0 mx-auto text-center transition-all duration-500">
-                                <router-link :to="{ name: 'product-detail', params: { id: product.id } }" class="btn btn-sm rounded-full bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white"><i class="mdi mdi-lightning-bolt"></i> Buy Now</router-link>
+                              <div class="flex gap-2 mt-2">
+                                <button class="btn btn-sm rounded-full bg-yellow-500 hover:bg-yellow-600 text-white" @click="editProduct(product.id)"><i class="mdi mdi-pencil"></i> Edit</button>
+                                <button class="btn btn-sm rounded-full bg-red-600 hover:bg-red-700 text-white" @click="deleteProduct(product.id)"><i class="mdi mdi-delete"></i> Hapus</button>
+                              </div>
                             </div>
 
                             <div class="absolute top-2 end-2 opacity-0 group-hover:opacity-100 transition-all duration-500">
@@ -53,7 +56,7 @@
                             <div class="flex justify-between p-2 bg-gray-50 dark:bg-slate-800 rounded-lg shadow dark:shadow-gray-700">
                                 <div>
                                     <span class="text-[16px] font-medium text-slate-400 block">Harga</span>
-                                    <span class="text-[16px] font-semibold block"><i class="mdi mdi-ethereum"></i> {{ formatRupiah(product.price) }}</span>
+                                    <span class="text-[16px] font-semibold block">{{ formatRupiah(product.price) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -103,12 +106,10 @@ export default {
             const formattedData = this.products.map((item) => ({
                 ...item,
                 remaining: this.tickTock(item.date),
-
             }));
             this.productData = formattedData;
-
         },
-                    image: require('../assets/images/avatar/4.jpg'),
+        image: require('../assets/images/avatar/4.jpg'),
         tickTock(date) {
             let startDate = new Date(date);
             let currentDate = new Date();
@@ -127,6 +128,21 @@ export default {
         formatRupiah(value) {
             if (!value) return '-';
             return Number(value).toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 });
+        },
+        editProduct(productId) {
+            // Navigasi ke halaman edit produk
+            this.$router.push({ path: `/edit-product/${productId}` })
+        },
+        async deleteProduct(productId) {
+            if (confirm('Yakin ingin menghapus produk ini?')) {
+                const productStore = useProductStore();
+                const result = await productStore.deleteProduct(productId);
+                if (result) {
+                    this.filteredData = this.filteredData.filter(p => p.id !== productId);
+                } else {
+                    alert(productStore.error || 'Gagal menghapus produk');
+                }
+            }
         },
     }
 }

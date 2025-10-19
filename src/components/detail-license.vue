@@ -13,7 +13,7 @@
             </div>
             <div class="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
                 <div class="lg:col-span-5">
-                    <img :src="licenseDetail.image_url" class="rounded-md shadow dark:shadow-gray-700 w-full" alt="">
+                    <img :src="licenseDetail.image_url_1" class="rounded-md shadow dark:shadow-gray-700 w-full" alt="">
                     <!-- ...tambahkan info lain jika perlu... -->
                 </div>
                 <div class="lg:col-span-7">
