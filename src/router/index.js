@@ -57,7 +57,7 @@ const routes = [
     component: () => import('@/pages/explore-item/parent-license.vue'),
   },
   {
-    path: "/uploadlicenset",
+    path: "/upload-license",
     name: "upload-license",
     component: () => import('@/pages/explore-item/upload-license.vue'),
   },
@@ -196,6 +196,11 @@ const routes = [
     name: "error",
     component: () => import('@/pages/miscellaneous/error.vue'),
   },
+  {
+    path: "/edit-product/:id",
+    name: "edit-product",
+    component: () => import('@/pages/explore-item/edit-product.vue'),
+  }
 
 ];
 
