@@ -18,7 +18,7 @@ import sidebar from '@/components/sidebar/sidebar.vue';
 import headers from '@/components/header/header.vue';
 import footers from '@/components/footer/footer.vue';
 import switcher from '@/components/switcher.vue';
-import uploadwork from '@/components/upload-work.vue'
+import uploadwork from '@/components/upload-license.vue'
 
 export default {
     data() {
