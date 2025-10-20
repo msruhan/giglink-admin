@@ -41,5 +41,31 @@ export const useLicenseStore = defineStore('storeLicense', {
         this.loading = false
       }
     },
+
+    async postLicense(formData: FormData) {
+      this.loading = true;
+      this.error = null;
+      this.success = false;
+      try {
+        const token = localStorage.getItem('jwt_token');
+        const response = await axios.post(
+          'http://localhost:5050/api/licenses',
+          formData,
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : undefined,
+              // Jangan set Content-Type, biarkan axios yang handle
+            },
+          }
+        );
+        this.success = true;
+        return response.data;
+      } catch (err: any) {
+        this.error = err.response?.data?.message || err.message || 'Terjadi kesalahan';
+        return null;
+      } finally {
+        this.loading = false;
+      }
+    },
   },
 })
