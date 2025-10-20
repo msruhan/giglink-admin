@@ -9,6 +9,54 @@ export const useLicenseStore = defineStore('storeLicense', {
     licenses: [] as any[],
   }),
   actions: {
+    async editLicense(id: string | number, formData: FormData) {
+      this.loading = true;
+      this.error = null;
+      this.success = false;
+      try {
+        const token = localStorage.getItem('jwt_token');
+        const response = await axios.patch(
+          `http://localhost:5050/api/licenses/${id}`,
+          formData,
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : undefined,
+              // Jangan set Content-Type, biarkan axios yang handle
+            },
+          }
+        );
+        this.success = true;
+        return response.data;
+      } catch (err: any) {
+        this.error = err.response?.data?.message || err.message || 'Terjadi kesalahan';
+        return null;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async deleteLicense(id: string | number) {
+      this.loading = true;
+      this.error = null;
+      this.success = false;
+      try {
+        const token = localStorage.getItem('jwt_token');
+        const response = await axios.delete(`http://localhost:5050/api/licenses/${id}`,
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : undefined,
+            },
+          }
+        );
+        this.success = true;
+        return response.data;
+      } catch (err: any) {
+        this.error = err.response?.data?.message || err.message || 'Terjadi kesalahan';
+        return null;
+      } finally {
+        this.loading = false;
+      }
+    },
     async getLicenses() {
       console.log('Fetching licenses...')
       this.loading = true
