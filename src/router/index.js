@@ -200,6 +200,11 @@ const routes = [
     path: "/edit-product/:id",
     name: "edit-product",
     component: () => import('@/pages/explore-item/edit-product.vue'),
+  },
+  {
+    path: "/edit-license/:id",
+    name: "edit-license",
+    component: () => import('@/pages/explore-item/edit-license.vue'),
   }
 
 ];
